@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>60-Day Frontend Engineering Roadmap</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f8f6;color:#1a1a1a;padding:2rem 1rem}
+.container{max-width:900px;margin:0 auto}
+h1{font-size:22px;font-weight:500;margin-bottom:6px}
+.subtitle{font-size:14px;color:#666;margin-bottom:1.5rem;line-height:1.5}
+.progress-wrap{background:#e8e8e4;border-radius:99px;height:8px;margin-bottom:6px;overflow:hidden}
+.progress-fill{height:8px;border-radius:99px;background:#7F77DD;transition:width 0.4s}
+.progress-label{font-size:13px;color:#666;margin-bottom:1.5rem}
+.phase-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem}
+.phase-tab{font-size:12px;padding:5px 12px;border-radius:99px;border:1px solid #ccc;cursor:pointer;background:#fff;color:#555;transition:all 0.15s;white-space:nowrap}
+.phase-tab:hover{background:#f0f0ee}
+.phase-tab.active{background:#EEEDFE;border-color:#AFA9EC;color:#3C3489}
+.phase-block{margin-bottom:2rem}
+.phase-header{display:flex;align-items:center;gap:10px;margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid #e0e0dc;flex-wrap:wrap}
+.phase-badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:99px}
+.phase-title{font-size:14px;color:#444;flex:1}
+.phase-progress{font-size:12px;color:#888;white-space:nowrap}
+.days-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:8px}
+.day-card{border:1px solid #e0e0dc;border-radius:8px;padding:10px 12px;cursor:pointer;transition:all 0.15s;background:#fff;position:relative}
+.day-card:hover{border-color:#bbb;background:#fafaf8}
+.day-card.done{background:#EAF3DE;border-color:#97C459}
+.day-card.done .day-num{color:#3B6D11}
+.day-card.done .day-topic{color:#27500A}
+.day-card.selected{border:2px solid #7F77DD}
+.day-num{font-size:11px;color:#888;margin-bottom:3px;font-weight:500}
+.day-topic{font-size:12px;color:#333;line-height:1.4}
+.check{position:absolute;top:8px;right:8px;width:16px;height:16px;border-radius:50%;background:#639922;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.15s}
+.day-card.done .check{opacity:1}
+.milestone{border-left:3px solid #7F77DD;padding:8px 12px;background:#EEEDFE;border-radius:0 8px 8px 0;margin-top:0.75rem;font-size:13px;color:#3C3489}
+.detail-panel{border:1px solid #e0e0dc;border-radius:10px;padding:1.25rem;margin-bottom:1.5rem;background:#fff}
+.detail-panel h3{font-size:15px;font-weight:500;margin-bottom:0.75rem}
+.detail-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:0.75rem}
+.tag{font-size:11px;padding:3px 9px;border-radius:99px;border:1px solid #ddd;color:#666;background:#fafaf8}
+.detail-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:0.75rem}
+.detail-actions button{font-size:13px;padding:6px 14px;border-radius:6px;border:1px solid #ccc;cursor:pointer;background:#fff;color:#333}
+.detail-actions button:hover{background:#f5f5f3}
+.detail-actions button.primary{background:#7F77DD;border-color:#7F77DD;color:#fff}
+.detail-actions button.primary:hover{background:#534AB7}
+@media(max-width:500px){.days-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}.phase-title{display:none}}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>60-day frontend engineering roadmap</h1>
+  <p class="subtitle">Click any day card to view details. Click again to mark complete. Track your journey from foundations to senior-level frontend engineering.</p>
+  <div class="progress-wrap"><div class="progress-fill" id="pbar" style="width:0%"></div></div>
+  <div class="progress-label" id="plabel">0 / 60 days completed</div>
+  <div class="phase-tabs" id="phase-tabs"></div>
+  <div id="detail-area"></div>
+  <div id="phase-area"></div>
+</div>
+
+<script>
+const PHASES = [
+  {
+    id:"p1",label:"Phase 1",badge:"Foundations",color:"#EEEDFE",btext:"#3C3489",border:"#AFA9EC",
+    days:"Days 1–10",desc:"HTML, CSS, Git, Responsive Design + JavaScript deep dive",
+    days_data:[
+      {d:1,topic:"How the web works + HTML5 semantics",tags:["HTML5","Semantic HTML","Forms","SEO","HTTP basics"]},
+      {d:2,topic:"CSS3 fundamentals",tags:["Box model","Specificity","Cascade","Units","Positioning"]},
+      {d:3,topic:"Flexbox, Grid, responsive design",tags:["Flexbox","CSS Grid","Media queries","Mobile-first"]},
+      {d:4,topic:"Sass, Tailwind, design systems basics",tags:["Tailwind CSS","Sass","Design tokens","Dark mode"]},
+      {d:5,topic:"Git, GitHub, developer workflow",tags:["Git","Branching","Pull requests","Conventional commits"]},
+      {d:6,topic:"JavaScript fundamentals",tags:["Variables","Scope","Hoisting","Arrays","Objects","Closures"]},
+      {d:7,topic:"DOM manipulation + browser events",tags:["DOM tree","Events","Event delegation","localStorage"]},
+      {d:8,topic:"Advanced JavaScript",tags:["Closures","Prototypes","this","Destructuring","map/filter/reduce"]},
+      {d:9,topic:"Async JavaScript + APIs",tags:["Promises","async/await","Fetch API","Error handling","AbortController"]},
+      {d:10,topic:"JavaScript DSA for interviews",tags:["Arrays","Hash maps","Stacks","Two pointers","Recursion"]},
+    ],
+    milestone:"Milestone: 10 mini projects live on GitHub. Confident in vanilla JS and DOM."
+  },
+  {
+    id:"p2",label:"Phase 2",badge:"TypeScript + React",color:"#E1F5EE",btext:"#085041",border:"#5DCAA5",
+    days:"Days 11–20",desc:"TypeScript, tooling, React fundamentals to advanced patterns + Next.js",
+    days_data:[
+      {d:11,topic:"TypeScript beginner to intermediate",tags:["Types","Interfaces","Unions","Type inference","Narrowing"]},
+      {d:12,topic:"Advanced TypeScript",tags:["Generics","Utility types","Mapped types","Discriminated unions"]},
+      {d:13,topic:"Vite, npm, bundlers, build tooling",tags:["Vite","Tree shaking","Code splitting","ESLint","Prettier"]},
+      {d:14,topic:"React fundamentals",tags:["JSX","Props","State","Controlled inputs","Lists & keys"]},
+      {d:15,topic:"React Hooks deep dive",tags:["useState","useEffect","useRef","useMemo","useCallback","Custom hooks"]},
+      {d:16,topic:"React Router, forms, API integration",tags:["React Router","React Hook Form","Zod","Error boundaries"]},
+      {d:17,topic:"State management",tags:["Context API","Redux Toolkit","Zustand","TanStack Query","Optimistic updates"]},
+      {d:18,topic:"React advanced patterns",tags:["Compound components","Lazy loading","Suspense","Memoization"]},
+      {d:19,topic:"Next.js fundamentals",tags:["App Router","Layouts","Server components","Client components"]},
+      {d:20,topic:"Next.js data fetching + caching",tags:["SSR","SSG","ISR","Route handlers","Server actions","Streaming"]},
+    ],
+    milestone:"Milestone: Full React + Next.js app deployed on Vercel with TypeScript."
+  },
+  {
+    id:"p3",label:"Phase 3",badge:"Auth, Testing, Perf",color:"#FAECE7",btext:"#4A1B0C",border:"#F0997B",
+    days:"Days 21–30",desc:"Authentication, testing, accessibility, performance, security, system design",
+    days_data:[
+      {d:21,topic:"Authentication + authorization",tags:["JWT","Sessions","OAuth","RBAC","CSRF","XSS","Secure cookies"]},
+      {d:22,topic:"Testing: unit, component, E2E",tags:["Vitest","React Testing Library","Cypress","Playwright"]},
+      {d:23,topic:"Accessibility (a11y)",tags:["ARIA","Keyboard nav","Focus management","WCAG","Screen readers"]},
+      {d:24,topic:"Web performance optimization",tags:["Core Web Vitals","LCP","CLS","INP","Lazy loading","Virtualization"]},
+      {d:25,topic:"Frontend security",tags:["XSS","CSRF","CORS","CSP","Input sanitization","Env vars"]},
+      {d:26,topic:"Browser internals + rendering",tags:["Render tree","Event loop","Reflow","Repaint","Microtasks"]},
+      {d:27,topic:"Frontend architecture + scalability",tags:["Feature folders","API layer","Design systems","Monorepos"]},
+      {d:28,topic:"Frontend system design",tags:["Component design","Caching strategy","Real-time","Offline","i18n"]},
+      {d:29,topic:"DevOps, CI/CD, Docker, deployment",tags:["Vercel","GitHub Actions","Docker","Preview deployments"]},
+      {d:30,topic:"Full interview simulation + portfolio polish",tags:["Machine coding","System design","README","Case study"]},
+    ],
+    milestone:"Milestone: 2 production-grade projects with tests, CI/CD, and case studies."
+  },
+  {
+    id:"p4",label:"Phase 4",badge:"Depth & Specialization",color:"#E6F1FB",btext:"#042C53",border:"#85B7EB",
+    days:"Days 31–40",desc:"React internals, animations, data viz, real-time, drag & drop, i18n, monorepos",
+    days_data:[
+      {d:31,topic:"React internals + reconciliation",tags:["Fiber","Reconciler","Diffing","Priority lanes","Concurrent mode"]},
+      {d:32,topic:"CSS animations + transitions",tags:["keyframes","transition","will-change","Framer Motion"]},
+      {d:33,topic:"Data visualization",tags:["Recharts","D3.js basics","Chart types","Responsive charts","Real-time charts"]},
+      {d:34,topic:"Real-time patterns",tags:["WebSockets","Server-Sent Events","Polling","Optimistic UI","Presence"]},
+      {d:35,topic:"Drag and drop + complex interactions",tags:["dnd-kit","Pointer events","Touch support","Keyboard a11y"]},
+      {d:36,topic:"File uploads + media handling",tags:["File API","Multipart uploads","Image resize","Video","S3 patterns"]},
+      {d:37,topic:"Internationalization (i18n)",tags:["next-intl","react-i18next","RTL support","Locale routing"]},
+      {d:38,topic:"Advanced forms + validation patterns",tags:["Multi-step forms","Field arrays","Conditional fields","Async validation"]},
+      {d:39,topic:"Component library deep build",tags:["Storybook","Tokens","Polymorphic components","Compound API","Docs"]},
+      {d:40,topic:"Monorepo architecture",tags:["Turborepo","npm workspaces","Shared packages","Changesets","Versioning"]},
+    ],
+    milestone:"Milestone: Advanced UI interactions and data-heavy features shipped and documented."
+  },
+  {
+    id:"p5",label:"Phase 5",badge:"Full-Stack & APIs",color:"#EAF3DE",btext:"#173404",border:"#97C459",
+    days:"Days 41–50",desc:"Backend-for-frontend patterns, databases, GraphQL, payments, search, SaaS architecture",
+    days_data:[
+      {d:41,topic:"REST API design principles",tags:["Resource naming","HTTP methods","Status codes","Pagination","Versioning"]},
+      {d:42,topic:"GraphQL for frontend engineers",tags:["Queries","Mutations","Subscriptions","Apollo Client","Code-gen"]},
+      {d:43,topic:"Next.js API routes + server actions",tags:["Route handlers","Form actions","Middleware","Edge runtime"]},
+      {d:44,topic:"Database basics for frontend devs",tags:["SQL basics","Prisma ORM","Supabase","Drizzle","Type-safe queries"]},
+      {d:45,topic:"Authentication deep dive",tags:["NextAuth.js","Auth.js","Magic links","Passkeys","OAuth 2.0","MFA"]},
+      {d:46,topic:"File storage + CDN patterns",tags:["Cloudinary","AWS S3","Vercel Blob","Edge caching","Image optimization"]},
+      {d:47,topic:"Email integration",tags:["Resend","Nodemailer","React Email","Transactional emails","Templates"]},
+      {d:48,topic:"Payments + subscriptions frontend",tags:["Stripe Elements","Checkout session","Webhooks","Billing page"]},
+      {d:49,topic:"Search + autocomplete systems",tags:["Algolia","Typesense","Debounce","Highlighting","Facets","Fuzzy search"]},
+      {d:50,topic:"SaaS product architecture",tags:["Multi-tenancy","Orgs & roles","Feature flags","Billing gates","Onboarding"]},
+    ],
+    milestone:"Milestone: Full-stack SaaS feature built — auth, DB, payments, email, search."
+  },
+  {
+    id:"p6",label:"Phase 6",badge:"Senior Engineering",color:"#FAEEDA",btext:"#412402",border:"#EF9F27",
+    days:"Days 51–60",desc:"Observability, migrations, feature flags, code review culture, open source, job strategy",
+    days_data:[
+      {d:51,topic:"Observability + error monitoring",tags:["Sentry","Datadog","LogRocket","Web vitals tracking","Custom events"]},
+      {d:52,topic:"Feature flags + progressive delivery",tags:["LaunchDarkly","Vercel edge config","A/B testing","Gradual rollouts"]},
+      {d:53,topic:"Performance budgets + regression prevention",tags:["Lighthouse CI","Bundle size budgets","Synthetic monitoring"]},
+      {d:54,topic:"Migration strategies",tags:["CRA to Vite","Pages to App Router","JS to TS","Incremental adoption"]},
+      {d:55,topic:"Documentation + developer experience",tags:["ADRs","API docs","README standards","Onboarding guides"]},
+      {d:56,topic:"Code review + engineering culture",tags:["PR review patterns","Conventional commits","Changelog","Semver"]},
+      {d:57,topic:"Advanced system design practice",tags:["YouTube UI","Google Docs collab","Trading dashboard","Real-time chat"]},
+      {d:58,topic:"Open source contribution + community",tags:["Good first issues","Fork & PR","Issue triage","Docs contributions"]},
+      {d:59,topic:"Job application strategy",tags:["Resume","LinkedIn","Portfolio","Cold outreach","Referrals","Screening calls"]},
+      {d:60,topic:"Final project demo + interview readiness",tags:["Live demo","Case study video","System design mock","Behavioural Q&A"]},
+    ],
+    milestone:"Milestone: Senior-ready portfolio, two production projects, confident across all interview types."
+  }
+];
+
+const KEY="roadmap60_v2";
+let done=new Set(JSON.parse(localStorage.getItem(KEY)||"[]"));
+let active="all";
+let sel=null;
+
+function save(){localStorage.setItem(KEY,JSON.stringify([...done]))}
+
+function renderProgress(){
+  const pct=Math.round((done.size/60)*100);
+  document.getElementById("pbar").style.width=pct+"%";
+  document.getElementById("plabel").textContent=`${done.size} / 60 days completed — ${pct}%`;
+}
+
+function renderTabs(){
+  const c=document.getElementById("phase-tabs");
+  c.innerHTML=`<button class="phase-tab ${active==='all'?'active':''}" onclick="setPhase('all')">All phases</button>`+
+    PHASES.map(p=>`<button class="phase-tab ${active===p.id?'active':''}" onclick="setPhase('${p.id}')">${p.label}: ${p.badge}</button>`).join("");
+}
+
+function renderDetail(){
+  const a=document.getElementById("detail-area");
+  if(!sel){a.innerHTML="";return}
+  let fd=null,fp=null;
+  for(const p of PHASES)for(const d of p.days_data)if(d.d===sel){fd=d;fp=p;break}
+  if(!fd){a.innerHTML="";return}
+  const is_done=done.has(sel);
+  a.innerHTML=`<div class="detail-panel">
+    <h3>Day ${sel} — ${fd.topic}</h3>
+    <div class="detail-tags">${fd.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+    <div class="detail-actions">
+      <button class="primary" onclick="toggleDay(${sel})">${is_done?"✓ Mark incomplete":"Mark as done"}</button>
+      <button onclick="window.location.href='https://claude.ai/new?q='+encodeURIComponent('Give me a detailed study plan and hands-on tasks for Day ${sel}: ${fd.topic}')">Get study plan →</button>
+      <button onclick="window.location.href='https://claude.ai/new?q='+encodeURIComponent('Give me 10 interview questions for: ${fd.topic}')">Interview Q&A →</button>
+      <button onclick="sel=null;renderDetail();renderPhases()">Close</button>
+    </div>
+  </div>`;
+}
+
+function renderPhases(){
+  const a=document.getElementById("phase-area");
+  const ps=active==="all"?PHASES:PHASES.filter(p=>p.id===active);
+  a.innerHTML=ps.map(p=>{
+    const pd=p.days_data.filter(d=>done.has(d.d)).length;
+    const cards=p.days_data.map(d=>{
+      const id=done.has(d.d);const is_sel=sel===d.d;
+      return `<div class="day-card ${id?'done':''} ${is_sel?'selected':''}" onclick="selectDay(${d.d})">
+        <div class="day-num">Day ${d.d}</div>
+        <div class="day-topic">${d.topic}</div>
+        <div class="check"><svg width="9" height="8" viewBox="0 0 10 8" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,4 4,7 9,1"/></svg></div>
+      </div>`;
+    }).join("");
+    return `<div class="phase-block">
+      <div class="phase-header">
+        <span class="phase-badge" style="background:${p.color};color:${p.btext};border:1px solid ${p.border}">${p.label}: ${p.badge}</span>
+        <span class="phase-title">${p.desc}</span>
+        <span class="phase-progress">${pd}/${p.days_data.length} done · ${p.days}</span>
+      </div>
+      <div class="days-grid">${cards}</div>
+      <div class="milestone">🏁 ${p.milestone}</div>
+    </div>`;
+  }).join("");
+}
+
+function setPhase(id){active=id;renderTabs();renderPhases()}
+function selectDay(d){sel=sel===d?null:d;renderDetail();renderPhases()}
+function toggleDay(d){if(done.has(d))done.delete(d);else done.add(d);save();renderProgress();renderDetail();renderPhases()}
+
+renderProgress();renderTabs();renderDetail();renderPhases();
+</script>
+</body>
+</html>
