@@ -1,0 +1,13 @@
+ -=========HOW The Internet Works =============\
+
+
+Understand what actually happens when you type a URL and hit enter. This mental model underpins everything you'll build.
+
+Topics covered
+DNS resolution: domain names → IP addresses
+TCP/IP handshake and what 'connection' means
+HTTP request/response cycle (methods, headers, status codes)
+What a browser does with HTML: parsing → DOM → render
+Client vs. server — who does what
+
+
