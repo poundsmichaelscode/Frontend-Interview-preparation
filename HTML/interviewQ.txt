@@ -1,0 +1,364 @@
+These are strong frontend interview questions because they test both **theory** and **real-world understanding**.
+
+Here’s how an interviewer is usually evaluating each one behind the scenes:
+
+---
+
+# 🌐 How the Web Works
+
+## 1. What happens when you type a URL into a browser?
+
+### What they want to hear:
+
+A candidate who understands the full request lifecycle.
+
+### Strong answer structure:
+
+1. Browser checks cache
+2. DNS resolves domain → IP address
+3. Browser opens TCP connection
+4. HTTPS performs TLS handshake
+5. Browser sends HTTP request
+6. Server sends HTTP response
+7. Browser parses HTML
+8. Browser downloads CSS/JS/assets
+9. DOM + CSSOM → Render Tree
+10. Page paints to screen
+
+### Bonus points:
+
+Mention:
+
+* CDN
+* Browser rendering pipeline
+* JavaScript blocking rendering
+* HTTP/2 or HTTP/3
+
+---
+
+## 2. HTTP vs HTTPS
+
+### Key concepts:
+
+* HTTP = plain text
+* HTTPS = encrypted using TLS/SSL
+
+### Why it matters:
+
+* Protects passwords/cards/data
+* Prevents interception
+* Builds user trust
+* Required for many browser APIs
+* Helps SEO rankings
+
+### Great extra detail:
+
+Explain certificates:
+
+* Browser verifies server identity
+* Prevents impersonation attacks
+
+---
+
+## 3. HTTP Status Codes
+
+A strong frontend engineer should know common ones instantly.
+
+| Range | Meaning       | Examples                                           |
+| ----- | ------------- | -------------------------------------------------- |
+| 2xx   | Success       | 200 OK, 201 Created                                |
+| 3xx   | Redirect      | 301 Moved Permanently                              |
+| 4xx   | Client errors | 400 Bad Request, 401 Unauthorized, 404 Not Found   |
+| 5xx   | Server errors | 500 Internal Server Error, 503 Service Unavailable |
+
+### Excellent practical explanation:
+
+* 404 → route/file missing
+* 401 → login required
+* 403 → authenticated but forbidden
+* 500 → backend crashed
+
+---
+
+## 4. GET vs POST
+
+This is really testing whether you understand APIs and REST.
+
+| GET          | POST             |
+| ------------ | ---------------- |
+| Fetch data   | Send/create data |
+| Data in URL  | Data in body     |
+| Cacheable    | Usually not      |
+| Bookmarkable | Not usually      |
+| Idempotent   | Usually not      |
+
+### Important interview keyword:
+
+**Idempotent**
+
+Meaning:
+
+> Repeating the request produces the same result.
+
+Example:
+
+* GET `/users` multiple times → same effect
+* POST `/users` repeatedly → creates duplicates
+
+---
+
+## 5. DNS Resolution
+
+### Simple explanation:
+
+DNS translates:
+
+```txt
+google.com → 142.250.xxx.xxx
+```
+
+### Strong answer flow:
+
+1. Browser cache
+2. OS cache
+3. Recursive resolver
+4. Root nameserver
+5. TLD nameserver (.com)
+6. Authoritative nameserver
+7. IP returned
+
+### Interviewer is checking:
+
+* Do you understand how browsers find servers?
+* Can you explain networking simply?
+
+---
+
+# 🏗️ HTML5 Semantic Questions
+
+## 6. What is Semantic HTML?
+
+### Best definition:
+
+Semantic HTML uses tags that describe the meaning of content.
+
+Example:
+
+```html
+<header>
+<nav>
+<main>
+<article>
+<footer>
+```
+
+instead of:
+
+```html
+<div>
+<div>
+<div>
+```
+
+### Benefits:
+
+* Accessibility
+* SEO
+* Better maintainability
+* Easier collaboration
+* Better screen reader support
+
+---
+
+## 7. `<article>` vs `<section>` vs `<div>`
+
+This question filters beginners from intermediate developers.
+
+| Element     | Purpose                         |
+| ----------- | ------------------------------- |
+| `<article>` | Self-contained reusable content |
+| `<section>` | Thematic grouping               |
+| `<div>`     | Generic container               |
+
+### Good examples:
+
+### `<article>`
+
+```html
+<article>
+  <h2>Blog Post</h2>
+</article>
+```
+
+### `<section>`
+
+```html
+<section>
+  <h2>Features</h2>
+</section>
+```
+
+### `<div>`
+
+```html
+<div class="card"></div>
+```
+
+### Important insight:
+
+If a heading makes sense for the content,
+`<section>` is often appropriate.
+
+---
+
+## 8. Layout Tags
+
+### `<header>`
+
+Top introductory content
+
+### `<main>`
+
+Primary content of the page
+
+### `<footer>`
+
+Bottom info/copyright/links
+
+### `<aside>`
+
+Sidebar or related content
+
+### Accessibility benefit:
+
+Screen readers recognize these as **landmarks**.
+
+Users can jump directly between page regions.
+
+---
+
+## 9. `<figure>` and `<figcaption>`
+
+### Purpose:
+
+Associate media with a caption.
+
+Example:
+
+```html
+<figure>
+  <img src="chart.png" alt="Sales chart">
+  <figcaption>2025 Sales Growth</figcaption>
+</figure>
+```
+
+### Why important:
+
+* Better semantics
+* Better accessibility
+* Clear media relationships
+
+---
+
+## 10. Semantic HTML + Accessibility + ARIA
+
+This is a very important senior-level topic.
+
+### Key principle:
+
+> Native HTML semantics first. ARIA second.
+
+Bad:
+
+```html
+<div role="button">
+```
+
+Better:
+
+```html
+<button>
+```
+
+### Why?
+
+Native elements already include:
+
+* keyboard support
+* focus behavior
+* screen reader meaning
+
+### ARIA is for:
+
+Filling gaps when HTML alone cannot express behavior.
+
+Examples:
+
+* `aria-expanded`
+* `aria-label`
+* `aria-live`
+
+### Important interview phrase:
+
+> “Don’t use ARIA when native HTML already solves the problem.”
+
+---
+
+# 🚀 What Makes a Candidate Stand Out
+
+Interviewers usually look for:
+
+## Junior Developer
+
+* Knows definitions
+* Basic understanding
+* Can explain simply
+
+## Mid-Level Developer
+
+* Understands browser behavior
+* Can connect concepts to performance/accessibility
+* Uses semantic HTML correctly in projects
+
+## Senior Developer
+
+* Explains tradeoffs
+* Discusses rendering/performance/security
+* Understands accessibility deeply
+* Connects frontend decisions to UX and SEO
+
+---
+
+# 📚 Topics You Should Master Next
+
+To go deeper into frontend interviews, study:
+
+* Browser rendering pipeline
+* Critical rendering path
+* Event loop
+* CORS
+* Cookies vs localStorage vs sessionStorage
+* REST APIs
+* WebSockets
+* Accessibility (a11y)
+* Core Web Vitals
+* SEO basics
+* HTTP caching
+* Service workers
+* CSR vs SSR vs SSG
+* Hydration
+* DOM vs Virtual DOM
+
+---
+
+# 🧠 Pro Interview Tip
+
+When answering:
+
+1. Start simple
+2. Add technical depth gradually
+3. Use real examples
+4. Mention performance/accessibility/security when relevant
+
+That makes you sound experienced instead of memorized.
+
