@@ -1,3 +1,7 @@
 .vscode
 node_modules/
-.DS_Store
+.DS_Stor
+
+.env
+
+.env.locale
