@@ -1,3 +1,6 @@
+
+
+
 There are 8 basic data types in JavaScript.
 
 Seven primitive data types:
@@ -11,3 +14,36 @@ symbol for unique identifiers.
 And one non-primitive data type:
 object for more complex data structures.
 The typeof operator allows us to see which type is stored in a variable.
+
+
+
+================  NUMBERS  =================
+
+
+//i==============  Operators  ==============
+
+const fiveSquared = 5 ** 2
+
+const eightCubed =  8 ** 3
+
+const sevenToTheSixth = 7 ** 6
+
+const eightyThreeModSix = 83 % 6;
+
+const sixtyModNine = 60 % 9;
+
+// ADD CONSOLE LOGS BELOW
+
+
+
+
+console.log (fiveSquared);
+
+
+console.log (eightCubed);
+
+console.log (sevenToTheSixth);
+
+
+console.log(eightyThreeModSix);
+console.log(sixtyModNine);
