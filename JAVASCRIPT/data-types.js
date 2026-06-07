@@ -47,3 +47,10 @@ console.log (sevenToTheSixth);
 
 console.log(eightyThreeModSix);
 console.log(sixtyModNine);
+
+
+
+
+
+
+//==================== Numbers - Incrementor & Decrementor==================
