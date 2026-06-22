@@ -60,10 +60,9 @@ console.log ("count down")
 
 for (let i =3; i>=0; i--)
 
-{ console.log(i)};
+{ console.log(i)
 
-
-
+}
 
 
 
@@ -81,3 +80,66 @@ for (let star= 0;   star<=8;  star++)
 console.log (stars);
 
 }
+
+
+
+
+
+
+
+
+
+
+for (i = 5; i >=0 ; i--){
+
+console.log(i)};
+
+
+
+// increment by 2
+
+ 
+
+
+for (let i = 2; i <= 10; i+=2){
+
+console.log(i)
+
+}
+
+console.log("loop by two")
+
+
+for (let i =10; i >0 ; i-=2)
+{console.log(i)}
+
+console.log ("hello world!!")
+
+console.log ("GOT")
+
+
+
+const firstNames = ["Jon", "Arya", "Jamie"];
+const lastNames = ["Snow", "Stark", "Lannister"];
+const places = ["The Wall", "Winterfell", "Kings Landing"];
+
+
+const bios = [];
+
+// Loop through your arrays and store the following strings in the bios array:
+// 'My name is Jon Snow and I am from The Wall'
+// 'My name is Arya Stark and I am from Winterfell'
+// 'My name is Jamie Lannister and I am from Kings Landing'
+
+// ADD CODE HERE
+
+
+for (let i =0; i < firstNames.length; i++)
+{
+  
+bios.push(`My name is ${firstNames[i]} ${lastNames[i]} and I am from the ${places[i]}`);
+  
+}
+
+
+console.log(bios)
