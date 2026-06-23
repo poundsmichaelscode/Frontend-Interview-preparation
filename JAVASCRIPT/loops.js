@@ -143,3 +143,17 @@ bios.push(`My name is ${firstNames[i]} ${lastNames[i]} and I am from the ${place
 
 
 console.log(bios)
+
+
+
+console.log("While loop")
+
+let counter = 1;
+
+while (counter <=5 ) {
+
+    console.log(counter);
+     counter++
+}
+
+console.log('Counting completed!')
